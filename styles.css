@@ -1,4 +1,42 @@
 
+
+
+
+* {
+    font-family: monospace;
+    box-sizing: border-box;
+}
+
+#container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
 body {
-    background-color: aqua;
+    display: flex;
+    align-items: center;
+    min-height: 60vh;
+    text-align: center;
+
+}
+
+h1 {
+    padding-bottom: 90px;
+}
+
+button{
+    background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+
+}
+
+button:hover{
+    background-color: #357b37; /* Green */
+
 }
