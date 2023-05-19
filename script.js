@@ -10,6 +10,7 @@ var headerText = document.querySelector("h1");
 startBtn.addEventListener("click", function() {
     let timeLeft = 10;
     const timeElement = document.getElementById("time");
+    startBtn.style.display = "none";
   
     function countdown() {
       timeLeft--;
