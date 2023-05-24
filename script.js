@@ -3,11 +3,12 @@ var headerText = document.querySelector("h1");
 var question = document.querySelector("#question");
 var answerButtonsElement = document.getElementById('answer-btn');
 var currentQuestionIndex = 0;
-
-var lastQA = document.querySelector("#lastQuestionAnswer")
+var lastQA = document.querySelector("#lastQuestionAnswer");
+var currentScore = document.querySelector("#currentScore");
+var point = 10;
+var timeLeft = 70; // Declare timeLeft as a global variable
 
 startBtn.addEventListener("click", function() {
-  let timeLeft = 10;
   const timeElement = document.getElementById("time");
   startBtn.style.display = "none";
   headerText.style.display = "none";
@@ -44,30 +45,35 @@ function showQuestion() {
   });
 }
 
+
 function selectAnswer(event) {
   var selectedButton = event.target;
   var correct = questions[currentQuestionIndex].answers.some(answer => answer.text === selectedButton.innerText && answer.correct);
   if (correct) {
     // Handle correct answer logic here
     lastQA.innerText = "Correct";
+    currentScore.innerHTML = "Score: " + point;
   } else {
     // Handle wrong answer logic here
     lastQA.innerText = "Incorrect";
+    timeLeft -= 10;
   }
 
   // Increase the currentQuestionIndex to move to the next question
   currentQuestionIndex++;
 
-  // Check if there are more questions
-  if (currentQuestionIndex < questions.length) {
-    // If there are more questions, display the next question
-    setTimeout(showQuestion, 1000);
-  } else {
-    // If there are no more questions, display a message or perform any other actions
-    headerText.innerHTML = "Quiz completed!";
-    answerButtonsElement.innerHTML = ""; // Clear the answer buttons
-  }
+  // Display the next question
+  showQuestion();
 }
+
+function quizOver() {
+  // Quiz is completed, perform actions here
+  headerText.innerHTML = "Quiz completed!";
+  answerButtonsElement.innerHTML = ""; // Clear the answer buttons
+  // You can calculate the final score or display a message, etc.
+}
+
+
 
 const questions = [
   {
