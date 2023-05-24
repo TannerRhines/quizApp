@@ -23,6 +23,10 @@ header {
     display: inline;
 }
 
+#question, #answer-btn {
+    display: none;
+}
+
 
 
 h1 {
