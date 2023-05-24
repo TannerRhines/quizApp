@@ -35,6 +35,16 @@ startBtn.addEventListener("click", function() {
 
 
 
+function showQuestion() {
+  var questionText = document.getElementById("question");
+  questionText.innerText = questions[0].question;
+
+  var answerButtonsHTML = '';
+  questions[0].answers.forEach(answer => {
+    answerButtonsHTML += '<button class="btn">' + answer.text + '</button>';
+  });
+  answerButtonsElement.innerHTML = answerButtonsHTML;
+}
 
 
 
