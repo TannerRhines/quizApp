@@ -24,6 +24,89 @@ var highscoresListEl = document.getElementById('highscores-list');
 var feedbackEl = document.getElementById('feedback');
 var backLink = document.getElementById('back-link');
 
+startBtn.addEventListener('click', startQuiz);
+
+
+function startQuiz() {
+  timer = initialCountdown;
+  score = 0;
+  currentQuestionIndex = 0;
+
+  startBtn.style.display = 'none';
+  finalScoreEl.style.display = 'none';
+  countdownEl.textContent = timer;
+  currentScoreEl.textContent = score;
+  questionContainer.style.display = 'block';
+
+  intervalId = setInterval(updateTimer, 1000);
+
+  showNextQuestion();
+}
+
+
+function updateTimer() {
+  timer--;
+  countdownEl.textContent = timer;
+
+  if (timer <= 0) {
+      endQuiz();
+  }
+}
+
+function showNextQuestion() {
+  if (currentQuestionIndex >= questions.length) {
+      endQuiz();
+      return;
+  }
+
+  const question = questions[currentQuestionIndex];
+  questionEl.textContent = question.question;
+
+  answersEl.innerHTML = '';
+  question.answers.forEach(answer => {
+      const button = document.createElement('button');
+      button.textContent = answer.text;
+      button.addEventListener('click', selectAnswer);
+      answersEl.appendChild(button);
+  });
+}
+
+
+function selectAnswer(event) {
+  const selectedButton = event.target;
+  const answerText = selectedButton.textContent;
+  const question = questions[currentQuestionIndex];
+
+  const answer = question.answers.find(answer => answer.text === answerText);
+
+  if (answer.correct) {
+      score += 10;
+      feedbackEl.textContent = 'Correct!';
+  } else {
+      timer -= timePenalty;
+      feedbackEl.textContent = 'Incorrect!';
+  }
+
+  currentScoreEl.textContent = score;
+  currentQuestionIndex++;
+  showNextQuestion();
+}
+
+
+
+
+
+function endQuiz() {
+  clearInterval(intervalId);
+  questionContainer.style.display = 'none';
+  resultEl.textContent = score;
+  finalScoreEl.style.display = 'block';
+
+  if (timer <= 0) {
+      timeOutMessageEl.style.display = 'block';
+  }
+}
+
 
 
 const questions = [
