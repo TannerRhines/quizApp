@@ -1,3 +1,49 @@
+
+const questions = [
+  // Your questions and answers go here
+  {
+  question: "What is an apple?",
+  answers: [
+      { text: 'fruit', correct: true },
+      { text: 'vegetable', correct: false },
+      { text: 'rock', correct: false },
+      { text: 'animal', correct: false }
+  ]
+},
+{
+  question: "What is the capital of France?",
+  answers: [
+      { text: 'Paris', correct: true },
+      { text: 'London', correct: false },
+      { text: 'Berlin', correct: false },
+      { text: 'Madrid', correct: false }
+  ]
+},
+{
+  question: "What is lettuce?",
+  answers: [
+      { text: 'fruit', correct: false },
+      { text: 'vegetable', correct: true },
+      { text: 'rock', correct: false },
+      { text: 'animal', correct: false }
+  ]
+},
+{
+  question: "What is the capital of Russia?",
+  answers: [
+      { text: 'Paris', correct: false },
+      { text: 'London', correct: false },
+      { text: 'Berlin', correct: false },
+      { text: 'Moscow', correct: true }
+  ]
+},
+
+];
+
+
+
+
+
 const initialCountdown = 70;
 const timePenalty = 10;
 
@@ -25,6 +71,8 @@ var feedbackEl = document.getElementById('feedback');
 var backLink = document.getElementById('back-link');
 
 startBtn.addEventListener('click', startQuiz);
+saveScoreBtn.addEventListener('click', saveScore);
+highscoresLink.addEventListener('click', toggleHighscores);
 
 
 function startQuiz() {
@@ -108,45 +156,27 @@ function endQuiz() {
 }
 
 
+function saveScore() {
+  const initials = initialsEl.value;
+  if (initials === '') return;
 
-const questions = [
-  // Your questions and answers go here
-  {
-  question: "What is an apple?",
-  answers: [
-      { text: 'fruit', correct: true },
-      { text: 'vegetable', correct: false },
-      { text: 'rock', correct: false },
-      { text: 'animal', correct: false }
-  ]
-},
-{
-  question: "What is the capital of France?",
-  answers: [
-      { text: 'Paris', correct: true },
-      { text: 'London', correct: false },
-      { text: 'Berlin', correct: false },
-      { text: 'Madrid', correct: false }
-  ]
-},
-{
-  question: "What is lettuce?",
-  answers: [
-      { text: 'fruit', correct: false },
-      { text: 'vegetable', correct: true },
-      { text: 'rock', correct: false },
-      { text: 'animal', correct: false }
-  ]
-},
-{
-  question: "What is the capital of Russia?",
-  answers: [
-      { text: 'Paris', correct: false },
-      { text: 'London', correct: false },
-      { text: 'Berlin', correct: false },
-      { text: 'Moscow', correct: true }
-  ]
-},
+  let highscores = JSON.parse(localStorage.getItem('highscores')) || [];
+  highscores.push({ initials, score });
+  localStorage.setItem('highscores', JSON.stringify(highscores));
 
-];
+  initialsEl.value = '';
+  startBtn.style.display = 'block';
+  finalScoreEl.style.display = 'none';
+}
 
+
+
+  
+  
+  
+  backLink.addEventListener('click', () => {
+      quiz.style.display = 'block';
+      highscoresDisplay.style.display = 'none';
+      highscoresLink.textContent = 'High Scores';
+      backLink.style.display = 'none';
+  });
