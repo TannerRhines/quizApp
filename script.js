@@ -44,7 +44,7 @@ const questions = [
 
 
 
-const initialCountdown = 70;
+const initialCountdown = 60;
 const timePenalty = 10;
 
 let timer;
