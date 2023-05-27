@@ -2,32 +2,45 @@
 
 body {
     text-align: center;
+    font-family: 'Source Code Pro', monospace;
 }
 #start, #question-container, #final-score, #highscores-display {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    margin: 40px;
 }
 #timer {
     position: absolute;
     top: 0;
     right: 0;
+    margin: 40px;
 }
 #score-display {
     position: absolute;
     top: 0;
     left: 50%;
     transform: translate(-50%, 0);
+    margin: 40px;
 }
 #highscores-link {
     position: absolute;
     top: 0;
     left: 0;
+    margin: 40px;
 }
 #back-link {
     position: absolute;
     bottom: 0;
     left: 50%;
     transform: translate(-50%, 0);
+    
 }
+
+#highscores-list {
+    padding: 10px;
+    margin: 40px;
+    list-style-type: none;
+}
+

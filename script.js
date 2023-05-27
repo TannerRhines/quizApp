@@ -2,39 +2,39 @@
 const questions = [
   // Your questions and answers go here
   {
-  question: "What is an apple?",
+  question: "What is JavaScript primarily used for?",
   answers: [
-      { text: 'fruit', correct: true },
-      { text: 'vegetable', correct: false },
-      { text: 'rock', correct: false },
-      { text: 'animal', correct: false }
+      { text: 'web pages', correct: true },
+      { text: 'machine learning', correct: false },
+      { text: 'gaming', correct: false },
+      { text: 'databases', correct: false }
   ]
 },
 {
-  question: "What is the capital of France?",
+  question: "What does .pop() do to an array?",
   answers: [
-      { text: 'Paris', correct: true },
-      { text: 'London', correct: false },
-      { text: 'Berlin', correct: false },
-      { text: 'Madrid', correct: false }
+      { text: 'removes the last element', correct: true },
+      { text: 'removes the first element', correct: false },
+      { text: 'nothing', correct: false },
+      { text: 'all of the above', correct: false }
   ]
 },
 {
-  question: "What is lettuce?",
+  question: "What does CSS stand for?",
   answers: [
-      { text: 'fruit', correct: false },
-      { text: 'vegetable', correct: true },
-      { text: 'rock', correct: false },
-      { text: 'animal', correct: false }
+      { text: 'Cookie Software Style', correct: false },
+      { text: 'Cascading Style Sheets', correct: true },
+      { text: 'Cascade Super Style', correct: false },
+      { text: 'Cascading Super Sheet', correct: false }
   ]
 },
 {
-  question: "What is the capital of Russia?",
+  question: "What is HTML",
   answers: [
-      { text: 'Paris', correct: false },
-      { text: 'London', correct: false },
-      { text: 'Berlin', correct: false },
-      { text: 'Moscow', correct: true }
+      { text: 'Really Complicated', correct: false },
+      { text: 'Gaming Language', correct: false },
+      { text: 'ML language', correct: false },
+      { text: 'Markup Language', correct: true }
   ]
 },
 
