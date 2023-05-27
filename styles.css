@@ -1,0 +1,33 @@
+
+
+body {
+    text-align: center;
+}
+#start, #question-container, #final-score, #highscores-display {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#timer {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+#score-display {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+#highscores-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#back-link {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
