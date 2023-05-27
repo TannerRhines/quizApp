@@ -170,6 +170,36 @@ function saveScore() {
 }
 
 
+function toggleHighscores(event) {
+  event.preventDefault();
+  
+  const isHighscores = highscoresLink.textContent === 'High Scores';
+  highscoresLink.textContent = isHighscores ? 'Back' : 'High Scores';
+  backLink.style.display = isHighscores ? 'block' : 'none';
+  
+  if (isHighscores) {
+  clearInterval(intervalId);
+  quiz.style.display = 'none';
+  highscoresDisplay.style.display = 'block';
+  
+  const highscores = JSON.parse(localStorage.getItem('highscores')) || [];
+  highscores.sort((a, b) => b.score - a.score);  // Sorting high scores from highest to lowest
+  
+  highscoresListEl.innerHTML = '';
+  highscores.forEach(score => {
+      const li = document.createElement('li');
+      li.textContent = `${score.initials}: ${score.score}`;
+      highscoresListEl.appendChild(li);
+  });
+  } else {
+  quiz.style.display = 'block';
+  highscoresDisplay.style.display = 'none';
+  startBtn.style.display = 'block';
+  finalScoreEl.style.display = 'none';
+  }
+  }
+
+
 
   
   
