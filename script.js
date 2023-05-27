@@ -6,7 +6,9 @@ var currentQuestionIndex = 0;
 var lastQA = document.querySelector("#lastQuestionAnswer");
 var currentScore = document.querySelector("#currentScore");
 var point = 10;
-var timeLeft = 70; // Declare timeLeft as a global variable
+var timeLeft = 30; // Declare timeLeft as a global variable
+
+let countdownTimeout; // Declare timeout variable
 
 startBtn.addEventListener("click", function() {
   const timeElement = document.getElementById("time");
@@ -19,13 +21,15 @@ startBtn.addEventListener("click", function() {
     timeLeft--;
     timeElement.innerHTML = String(timeLeft);
     if (timeLeft > 0) {
-      setTimeout(countdown, 1000);
+      countdownTimeout = setTimeout(countdown, 1000);
     } else {
+      headerText.style.display = "block";
       headerText.innerHTML = "Time is up!";
+      currentQuestionIndex.style.display = "none";
     }
   }
 
-  setTimeout(countdown, 1000);
+  countdownTimeout = setTimeout(countdown, 1000);
   showQuestion();
 });
 
@@ -43,6 +47,11 @@ function showQuestion() {
   answerButtons.forEach(button => {
     button.addEventListener('click', selectAnswer);
   });
+
+  if (timeLeft === 0) {
+    questionText.style.display = "none";
+
+  }
 }
 
 
@@ -62,15 +71,25 @@ function selectAnswer(event) {
   // Increase the currentQuestionIndex to move to the next question
   currentQuestionIndex++;
 
-  // Display the next question
-  showQuestion();
+  // Check if we've gone through all the questions
+  if(currentQuestionIndex == questions.length){
+    quizOver();
+  } else {
+    // Display the next question
+    showQuestion();
+  }
 }
+
+
 
 function quizOver() {
   // Quiz is completed, perform actions here
+  clearTimeout(countdownTimeout); // Clear the countdown
+  headerText.style.display = "block";  // Set the display property to block
   headerText.innerHTML = "Quiz completed!";
   answerButtonsElement.innerHTML = ""; // Clear the answer buttons
   // You can calculate the final score or display a message, etc.
+  questionText.style.display = "none";
 }
 
 
@@ -105,6 +124,15 @@ const questions = [
   },
   {
     question: "What is Javascript used for?",
+    answers: [
+      { text: 'web dev', correct: true },
+      { text: 'gaming', correct: false },
+      { text: 'styling', correct: false },
+      { text: 'robotics', correct: false }
+    ]
+  },
+  {
+    question: "What does JSON do?",
     answers: [
       { text: 'web dev', correct: true },
       { text: 'gaming', correct: false },
