@@ -1,6 +1,6 @@
 
 const questions = [
-  // Your questions and answers go here
+  // these are the questions we're asking in our question index, true makes the correct answer 
   {
   question: "What is JavaScript primarily used for?",
   answers: [
@@ -43,7 +43,7 @@ const questions = [
 
 
 
-
+// default time and penalty for a wrong question
 const initialCountdown = 60;
 const timePenalty = 10;
 
@@ -75,6 +75,8 @@ saveScoreBtn.addEventListener('click', saveScore);
 highscoresLink.addEventListener('click', toggleHighscores);
 
 
+
+// start the quiz, show questions and update timer
 function startQuiz() {
   timer = initialCountdown;
   score = 0;
@@ -91,7 +93,7 @@ function startQuiz() {
   showNextQuestion();
 }
 
-
+// updates value of timer and ends quiz if timer = 0 
 function updateTimer() {
   timer--;
   countdownEl.textContent = timer;
@@ -100,7 +102,7 @@ function updateTimer() {
       endQuiz();
   }
 }
-
+// shows next question in index of questions and button logic 
 function showNextQuestion() {
   if (currentQuestionIndex >= questions.length) {
       endQuiz();
@@ -119,7 +121,9 @@ function showNextQuestion() {
   });
 }
 
+// if correct A is selected, add points, and show next question in Q index
 
+// if A is incorrect, invoke time penalty
 function selectAnswer(event) {
   const selectedButton = event.target;
   const answerText = selectedButton.textContent;
@@ -127,6 +131,8 @@ function selectAnswer(event) {
 
   const answer = question.answers.find(answer => answer.text === answerText);
 
+
+  // feedback states if previous question was correct or incorrect
   if (answer.correct) {
       score += 10;
       feedbackEl.textContent = 'Correct!';
@@ -136,14 +142,16 @@ function selectAnswer(event) {
   }
 
   currentScoreEl.textContent = score;
+  // update score ^ 
   currentQuestionIndex++;
+  
   showNextQuestion();
 }
 
 
 
 
-
+// ends quiz -- displays final score and hides question container
 function endQuiz() {
   clearInterval(intervalId);
   questionContainer.style.display = 'none';
@@ -155,7 +163,7 @@ function endQuiz() {
   }
 }
 
-
+// saves score and pushes JSON to local storage
 function saveScore() {
   const initials = initialsEl.value;
   if (initials === '') return;
@@ -169,7 +177,7 @@ function saveScore() {
   finalScoreEl.style.display = 'none';
 }
 
-
+// logic to view high scores and pull scores from storage 
 function toggleHighscores(event) {
   event.preventDefault();
   
@@ -183,7 +191,8 @@ function toggleHighscores(event) {
   highscoresDisplay.style.display = 'block';
   
   const highscores = JSON.parse(localStorage.getItem('highscores')) || [];
-  highscores.sort((a, b) => b.score - a.score);  // Sorting high scores from highest to lowest
+  highscores.sort((a, b) => b.score - a.score);  
+  // sorts the high scores from highest to lowest ^
   
   highscoresListEl.innerHTML = '';
   highscores.forEach(score => {
@@ -202,7 +211,7 @@ function toggleHighscores(event) {
 
 
   
-  
+// back button to exit high scores and restart the quiz 
   
   backLink.addEventListener('click', () => {
       quiz.style.display = 'block';
