@@ -20,6 +20,8 @@ INSTALLATION
 ------------
 Zero installation, simply click the link below
 
+https://tannerrhines.github.io/quizApp/
+
 
 
 
